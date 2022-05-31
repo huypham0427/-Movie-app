@@ -32,16 +32,17 @@ function App() {
   const searchMovie = async(e)=>{
     e.preventDefault();
     console.log("Searching");
+    setLoading(true);
     try{
       const url =`https://api.themoviedb.org/3/search/movie?api_key=151f5123399aa60296034f5094c257e3&query=${query}`;
       const res = await fetch(url);
-        if(!res.ok){  
+        if(!res){  
           throw Error('Could not fetch the data');
         }
       const data = await res.json();
       console.log(data);
       setMovies(data.results); 
-      setLoading(true);
+      setLoading(false);
     }
     catch(e){
       console.log(e.message);
@@ -72,14 +73,13 @@ function App() {
                 aria-label="search"
                 name=""
                 value={query} onChange={changeHandler} ></FormControl>
-                <Button variant="secondary" type="submit">Search
-                <ReactBootStrap.Spinner animation="border" variant='primary' />
-                </Button>
+                <Button variant="secondary" type="submit">Search</Button>
               </Form>
             </Navbar.Collapse>
         </Container>
       </Navbar>
       <div>
+        {loading && <div><ReactBootStrap.Spinner animation="border" variant='primary' /></div>}
         {movies.length > 0 ?(
         <div className="container">
           <div className="grid">
@@ -88,9 +88,8 @@ function App() {
           </div>
         </div>
         ):(
-          <h2>Sorry !! No Movies Found</h2>
+          <h2>No Movies Found</h2>
         )}
-        {/* <ReactBootStrap.Spinner animation="border" variant='primary' /> */}
       </div>   
     </>
 
