@@ -40,9 +40,3 @@ Here's a walkthrough of implemented user stories:
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-API_URL="https://api.themoviedb.org/3/movie/now_playing?api_key= [<<api_key>>]&language=en-US&page=1&fbclid=IwAR07o-_oLvsPWeAJQ0VwYxI2kEAaTA2UPo2XNrBqucDNfCL5Au0RBXSF8nk"
-
-API_IMG="https://image.tmdb.org/t/p/w500/"
-
-API_SEARCH="https://api.themoviedb.org/3/search/movie?api_key= [<<api_key>>]&language=en-US&page=1&include_adult=false"
