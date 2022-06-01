@@ -23,7 +23,7 @@ The following **optional** features are implemented:
 ## Video Walkthroguh
 Here's a walkthrough of implemented user stories:
 
-![gif](![ezgif com-gif-maker](https://user-images.githubusercontent.com/59068418/171346818-c739e1ea-3f9a-4a71-a4ae-dde263ba1d23.gif))
+(![ezgif com-gif-maker](https://user-images.githubusercontent.com/59068418/171346818-c739e1ea-3f9a-4a71-a4ae-dde263ba1d23.gif))
 
 ## License
 
