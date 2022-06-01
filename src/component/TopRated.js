@@ -73,4 +73,4 @@ function TopRated() {
   )
 }
 
-export default Home;
+export default TopRated;
