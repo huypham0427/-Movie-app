@@ -6,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import * as ReactBootStrap from 'react-bootstrap';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { Navigate } from 'react-router-dom';
-import Home from './component/Home';
-import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native';
+import {BrowserRouter as Router,Routes,Route,Link} from "react-router-dom";
+import TopRated from './component/TopRated'
 
 const API_URL="https://api.themoviedb.org/3/movie/now_playing?api_key=151f5123399aa60296034f5094c257e3&language=en-US&page=1&fbclid=IwAR07o-_oLvsPWeAJQ0VwYxI2kEAaTA2UPo2XNrBqucDNfCL5Au0RBXSF8nk";
 
@@ -15,12 +15,16 @@ const API_URL="https://api.themoviedb.org/3/movie/now_playing?api_key=151f512339
 function App() {
 
   const [movies, setMovies] = useState([]);
-  //Create a query for search bar
+  // Create a query for search bar
   const [query, setQuery] = useState('');
-  //Spinner loading API
+  // Spinner loading API
   const [loading, setLoading] = useState(false);
   // Network Error
   const [error, setError] = useState(null);
+  // Pull to Refresh
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   //Fetch API
   let response;
@@ -66,11 +70,12 @@ function App() {
 
   return (
     <>
-      <PullToRefresh onRefresh={setLoading}  style={{textAlign: 'center'}}>
-      <Navbar bg="dark" expand="lg" variant="dark">
-        <Container fluid>
+      <PullToRefresh onRefresh={refreshPage}>
+        <Router>
+          <Navbar bg="dark" expand="lg" variant="dark">
+          <Container fluid>
           <Navbar.Brand href="/home">Movee</Navbar.Brand>
-          <Navbar.Brand href="">Trending</Navbar.Brand>
+          <Nav.Link as={Link} to="/top-rated">Top Rated</Nav.Link>
           <Navbar.Toggle aria-controls="navbarScroll"></Navbar.Toggle>
             <Navbar.Collapse id="nabarScroll">
               <Nav className="me-auto my-2 my-lg-3"
@@ -88,8 +93,13 @@ function App() {
                 <Button variant="secondary" type="submit">Search</Button>
               </Form>
             </Navbar.Collapse>
-        </Container>
-      </Navbar>
+          </Container>
+          </Navbar>
+          <Routes>
+            <Route exact path="/top-rated" element={<TopRated />}/>
+          </Routes>
+        </Router>
+
       <div>
         {error && <div>{error}</div>}
         {loading && <div className='d-flex justify-content-center'><ReactBootStrap.Spinner animation="border" variant='primary' /></div>}
