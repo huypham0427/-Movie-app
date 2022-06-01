@@ -23,7 +23,7 @@ The following **optional** features are implemented:
 ## Video Walkthroguh
 Here's a walkthrough of implemented user stories:
 
-!{](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![gif](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
 ## License
 
