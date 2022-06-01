@@ -18,13 +18,26 @@ function App() {
   const [query, setQuery] = useState('');
   //Spinner loading API
   const [loading, setLoading] = useState(false);
+  // Network Error
+  const [error, setError] = useState(null);
+
   //Fetch API
+  let response;
   useEffect(() => {
-    fetch(API_URL)
-    .then((res) => res.json())
+    response = fetch(API_URL)
+    .then((res) => {
+     if(res.ok) return res.json()
+     else throw Error('Network Error');
+    })
     .then(data =>{
       console.log(data)
       setMovies(data.results);
+    })
+    .catch(err => {
+      if(!response.ok){
+        setError(err.message);
+      }
+      
     })
   }, [])
 
@@ -36,16 +49,13 @@ function App() {
     try{
       const url =`https://api.themoviedb.org/3/search/movie?api_key=151f5123399aa60296034f5094c257e3&query=${query}`;
       const res = await fetch(url);
-        if(!res){  
-          throw Error('Could not fetch the data');
-        }
       const data = await res.json();
       console.log(data);
       setMovies(data.results); 
       setLoading(false);
     }
     catch(e){
-      console.log(e.message);
+      console.log(e);
     }
   }
 
@@ -79,7 +89,8 @@ function App() {
         </Container>
       </Navbar>
       <div>
-        {loading && <div><ReactBootStrap.Spinner animation="border" variant='primary' /></div>}
+        {error && <div>{error}</div>}
+        {loading && <div className='d-flex justify-content-center'><ReactBootStrap.Spinner animation="border" variant='primary' /></div>}
         {movies.length > 0 ?(
         <div className="container">
           <div className="grid">
