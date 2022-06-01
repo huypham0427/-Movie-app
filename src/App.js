@@ -7,6 +7,7 @@ import * as ReactBootStrap from 'react-bootstrap';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { Navigate } from 'react-router-dom';
 import Home from './component/Home';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native';
 
 const API_URL="https://api.themoviedb.org/3/movie/now_playing?api_key=151f5123399aa60296034f5094c257e3&language=en-US&page=1&fbclid=IwAR07o-_oLvsPWeAJQ0VwYxI2kEAaTA2UPo2XNrBqucDNfCL5Au0RBXSF8nk";
 
@@ -65,6 +66,7 @@ function App() {
 
   return (
     <>
+      <PullToRefresh onRefresh={setLoading}  style={{textAlign: 'center'}}>
       <Navbar bg="dark" expand="lg" variant="dark">
         <Container fluid>
           <Navbar.Brand href="/home">Movee</Navbar.Brand>
@@ -101,7 +103,8 @@ function App() {
         ):(
           <h2>No Movies Found</h2>
         )}
-      </div>   
+      </div> 
+      </PullToRefresh>  
     </>
 
   );
